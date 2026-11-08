@@ -31,4 +31,118 @@
                     <a href="#home" class="hover:text-primary transition">Home</a>
                     <a href="#services" class="hover:text-primary transition">Services</a>
                     <a href="#contact" class="hover:text-primary transition">Contact</a>
-                    <button
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon-mobile" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 text-center">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Services</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-20 pb-32 flex items-center justify-center overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white leading-tight">
+                Your Trusted <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Digital Partner</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-gray-600 dark:text-gray-300">Fast, reliable, and secure government & digital services in Chandivali.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="px-8 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-lg shadow-lg transition-all">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+                
+                <div class="mt-8 max-w-md mx-auto relative">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search for a service..." class="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="serviceGrid">
+                
+                <!-- PAN Card -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="pan-icon.png.png" alt="PAN Card" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">PAN Card</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">New & Update</p>
+                </div>
+
+                <!-- Passport -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="passport-icon.png.png" alt="Passport Services" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Passport</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Fresh & Renewal</p>
+                </div>
+
+                <!-- Voter ID -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="voter-icon.png.png" alt="Voter ID" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Voter ID</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">New / Correction</p>
+                </div>
+
+                <!-- Aadhaar Card -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="21_aadhaar-icon.png.png" alt="Aadhaar" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Aadhaar Card</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Print & Update</p>
+                </div>
+
+                <!-- Gumasta -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="gumasta-icon.png.png" alt="Gumasta License" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Gumasta License</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Shop Act</p>
+                </div>
+
+                <!-- Income Certificate -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="income-icon.png.png" alt="Income Certificate" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Income Cert.</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">State Service</p>
+                </div>
+
+                <!-- Domicile Certificate -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="domicile-icon.png.png" alt="Domicile Certificate" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Domicile Cert.</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">State Service</p>
+                </div>
+
+                <!-- Gazette -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="gazette-icon.png.png" alt="Gazette Name Change" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Gazzat Cert.</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Name Change</p>
+                </div>
+
+                <!-- PCC -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="pcc-icon.png.png" alt="Police Clearance" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1">Police Clearance</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">PCC Application</p>
+                </div>
+
+                <!-- Udyam -->
+                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl
