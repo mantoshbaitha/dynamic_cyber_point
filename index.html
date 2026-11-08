@@ -1,375 +1,345 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Cyber Point | Digital Services Center</title>
-    <!-- Tailwind CSS for styling -->
+    <title>Dynamic Cyber Point | Digital Services in Mumbai</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#1e3a8a', // blue-900
-                        secondary: '#3b82f6', // blue-500
-                        accent: '#fbbf24', // amber-400
-                    }
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: { primary: '#2563eb', secondary: '#1e40af' }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar for a polished look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
-        .service-card:hover i {
-            transform: scale(1.1);
-            transition: transform 0.3s ease;
-        }
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+        .floating-wa { position: fixed; bottom: 20px; right: 20px; z-index: 50; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
     </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
 
-    <!-- Navigation Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 w-full backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo/Business Name -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="flex items-center gap-2">
-                        <div class="bg-primary text-white p-2 rounded-lg">
-                            <i class="fa-solid fa-laptop-code text-xl"></i>
-                        </div>
-                        <span class="font-bold text-2xl text-primary tracking-tight">Dynamic Cyber Point</span>
-                    </a>
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2 text-primary dark:text-blue-400 font-bold text-xl md:text-2xl tracking-tight">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    Dynamic Cyber Point
                 </div>
                 
                 <!-- Desktop Menu -->
-                <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-gray-600 hover:text-secondary transition font-medium">Home</a>
-                    <a href="#services" class="text-gray-600 hover:text-secondary transition font-medium">Services</a>
-                    <a href="#contact" class="text-gray-600 hover:text-secondary transition font-medium">Contact</a>
-                    <a href="tel:+917045892672" class="bg-primary hover:bg-blue-800 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-blue-900/20">
-                        <i class="fa-solid fa-phone mr-2"></i> Call Now
-                    </a>
-                </nav>
+                <div class="hidden md:flex space-x-8 items-center font-medium">
+                    <a href="#home" class="hover:text-primary transition">Home</a>
+                    <a href="#services" class="hover:text-primary transition">Services</a>
+                    <a href="#contact" class="hover:text-primary transition">Contact</a>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none p-2">
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon-mobile" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3 shadow-inner">
-                <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Home</a>
-                <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Services</a>
-                <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Contact</a>
-                <a href="tel:+917045892672" class="block px-3 py-2 mt-4 text-center text-base font-medium text-white bg-primary rounded-md">
-                    <i class="fa-solid fa-phone mr-2"></i> Call Now
-                </a>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Services</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="flex-grow">
-        
-        <!-- Hero Section -->
-        <section id="home" class="relative bg-primary text-white overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path fill="currentColor" d="M0 0l100 100H0z"></path>
-                    <path fill="currentColor" d="M100 0L0 100h100z"></path>
-                </svg>
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-20 pb-32 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 -z-10"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white leading-tight">
+                Your Trusted <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Digital Partner</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-gray-600 dark:text-gray-300">Fast, reliable, and secure government & digital services in Chandivali. We make your digital tasks effortless.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="px-8 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all">Explore Services</a>
+                <a href="#contact" class="px-8 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">Visit Us</a>
             </div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                        Your Trusted <span class="text-secondary drop-shadow-md">Digital Services</span> Partner
-                    </h1>
-                    <p class="text-lg sm:text-xl text-gray-200 mb-10 leading-relaxed">
-                        Fast, reliable, and secure digital solutions all in one place. From government certificates to travel bookings, we make your digital tasks effortless.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="#services" class="px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition shadow-lg">
-                            Explore Services
-                        </a>
-                        <a href="#contact" class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white/10 transition">
-                            Visit Us Today
-                        </a>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="max-w-7xl mx-auto px-4 -mt-16 relative z-10">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700 p-8 border border-gray-100 dark:border-gray-700">
+            <div class="text-center py-4 md:py-0">
+                <div class="text-4xl font-bold text-primary mb-2">15+</div>
+                <div class="text-gray-500 dark:text-gray-400 font-medium">Govt Services</div>
             </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Our Services</h2>
-                    <div class="w-24 h-1 bg-secondary mx-auto rounded-full"></div>
-                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto text-lg">We provide a wide range of online application, registration, and documentation services.</p>
-                </div>
-
-                <!-- Services Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    
-                    <!-- Service Item -->
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-passport text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Passport Services</h3>
-                        <p class="text-gray-500 text-sm">New applications, renewals, and urgent passport size photos.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-file-signature text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Income & Domicile</h3>
-                        <p class="text-gray-500 text-sm">Official certificates for income proof and state domicile.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-file-contract text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Gazzat Certificate</h3>
-                        <p class="text-gray-500 text-sm">Official name change documentation and Gazette publishing.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-store text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Gumasta License</h3>
-                        <p class="text-gray-500 text-sm">Shop & Establishment Act license for your business.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-shield-halved text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">PCC</h3>
-                        <p class="text-gray-500 text-sm">Police Clearance Certificate applications and tracking.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-industry text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Udyam Aadhaar</h3>
-                        <p class="text-gray-500 text-sm">Quick MSME business registration and certification.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-piggy-bank text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">PF Withdrawal</h3>
-                        <p class="text-gray-500 text-sm">Provident Fund balance check, claim, and withdrawal services.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-regular fa-id-card text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">PAN Card</h3>
-                        <p class="text-gray-500 text-sm">New PAN card applications and corrections/updates.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-heart-pulse text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Ayushman Card</h3>
-                        <p class="text-gray-500 text-sm">PMJAY health card generation and printing.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-address-card text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Voter ID & E-Shram</h3>
-                        <p class="text-gray-500 text-sm">New registration, updates, and card printing services.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-file-invoice text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Resume & CV</h3>
-                        <p class="text-gray-500 text-sm">Professional resume and curriculum vitae creation.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-indian-rupee-sign text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Money Transfer</h3>
-                        <p class="text-gray-500 text-sm">Secure and fast domestic money transfer services.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-print text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Xerox & Scanning</h3>
-                        <p class="text-gray-500 text-sm">High-quality printing, scanning, and lamination.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-utensils text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Food License</h3>
-                        <p class="text-gray-500 text-sm">FSSAI food license registration for food businesses.</p>
-                    </div>
-                    
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-id-badge text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">PVC Cards</h3>
-                        <p class="text-gray-500 text-sm">Durable smart PVC card printing for Aadhaar, PAN, etc.</p>
-                    </div>
-
-                    <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                            <i class="fa-solid fa-train-tram text-2xl text-secondary group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Travel Tickets</h3>
-                        <p class="text-gray-500 text-sm">Railway and flight ticket booking assistance.</p>
-                    </div>
-
-                </div>
+            <div class="text-center py-4 md:py-0">
+                <div class="text-4xl font-bold text-primary mb-2">100%</div>
+                <div class="text-gray-500 dark:text-gray-400 font-medium">Expert Support</div>
             </div>
-        </section>
-    </main>
+            <div class="text-center py-4 md:py-0">
+                <div class="text-4xl font-bold text-primary mb-2">Fast</div>
+                <div class="text-gray-500 dark:text-gray-400 font-medium">Processing Time</div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer / Contact Section -->
-    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-secondary">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Complete range of online applications, registrations, and digital services.</p>
                 
-                <!-- Brand Info -->
-                <div>
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="bg-white/10 p-2 rounded-lg text-secondary">
-                            <i class="fa-solid fa-laptop-code text-xl"></i>
-                        </div>
-                        <span class="font-bold text-2xl tracking-tight">Dynamic Cyber Point</span>
+                <!-- Search Bar for Services -->
+                <div class="mt-8 max-w-md mx-auto relative">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search for a service (e.g., PAN, Passport)..." 
+                           class="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all">
+                </div>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="serviceGrid">
+                
+                <!-- Government IDs -->
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center text-primary text-2xl mb-4">
+                        <i class="fa-solid fa-id-card"></i>
                     </div>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Making digital services accessible, fast, and easy for everyone. Visit us for all your documentation and registration needs.
-                    </p>
-                    <div class="flex space-x-4">
-                        <!-- Social placeholders -->
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors text-white">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors text-white">
-                            <i class="fa-brands fa-facebook-f text-lg"></i>
-                        </a>
-                    </div>
+                    <h3 class="text-xl font-bold mb-2">PAN Card</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">New PAN application, corrections, and updates with fast processing.</p>
                 </div>
 
-                <!-- Contact Details -->
-                <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="text-lg font-bold mb-6 uppercase tracking-wider text-gray-300">Visit Us</h4>
-                        <div class="flex items-start">
-                            <i class="fa-solid fa-location-dot mt-1 mr-4 text-secondary text-xl"></i>
-                            <p class="text-gray-300 leading-relaxed">
-                                Sangharsh Nagar,<br>
-                                Near by Zudio, Chandivali,<br>
-                                Mumbai 400072
-                            </p>
-                        </div>
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center text-green-600 text-2xl mb-4">
+                        <i class="fa-solid fa-passport"></i>
                     </div>
-                    
-                    <div>
-                        <h4 class="text-lg font-bold mb-6 uppercase tracking-wider text-gray-300">Contact Us</h4>
-                        <ul class="space-y-4">
-                            <li class="flex items-center">
-                                <i class="fa-solid fa-phone mr-4 text-secondary text-xl w-5 text-center"></i>
-                                <a href="tel:+917045892672" class="text-gray-300 hover:text-white hover:underline transition">+91 7045892672</a>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fa-brands fa-whatsapp mr-4 text-secondary text-xl w-5 text-center"></i>
-                                <a href="tel:+918928368119" class="text-gray-300 hover:text-white hover:underline transition">+91 8928368119</a>
-                            </li>
-                        </ul>
+                    <h3 class="text-xl font-bold mb-2">Passport Services</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Fresh passport, renewal, and urgent appointment booking assistance.</p>
+                </div>
+
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 text-2xl mb-4">
+                        <i class="fa-solid fa-fingerprint"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-2">Aadhaar & Voter ID</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">PVC Cards, Voter ID new/update, and smart card printing.</p>
+                </div>
+
+                <!-- Business & Certificates -->
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center text-orange-600 text-2xl mb-4">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Gumasta License</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Shop Act registration and Udyam Aadhaar for your business.</p>
+                </div>
+
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/50 rounded-lg flex items-center justify-center text-yellow-600 text-2xl mb-4">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">State Certificates</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Income Certificate, Domicile, and Gazzat (Name Change).</p>
+                </div>
+
+                <!-- Financial & Travel -->
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900/50 rounded-lg flex items-center justify-center text-teal-600 text-2xl mb-4">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Money Transfer</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Instant domestic money transfer and PF withdrawal services.</p>
+                </div>
+
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/50 rounded-lg flex items-center justify-center text-red-600 text-2xl mb-4">
+                        <i class="fa-solid fa-train"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Travel Tickets</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Railway (IRCTC) and Flight ticket bookings.</p>
+                </div>
+
+                <!-- General -->
+                <div class="service-item bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700 service-card">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 text-2xl mb-4">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Print & Scan</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Xerox, scanning, lamination, urgent passport photos, and Resume CV.</p>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <p>&copy; <span id="year"></span> Dynamic Cyber Point. All rights reserved.</p>
-                <p class="mt-2 md:mt-0">Designed for Digital India</p>
+            <div id="noResults" class="hidden text-center text-gray-500 py-10">
+                No services found matching your search. Please contact us!
             </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Visit Our Center</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8">Drop by our shop in Chandivali for quick and expert assistance with all your digital and documentation needs.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Address</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">Sangharsh Nagar, Nearby Zudio,<br>Chandivali, Andheri East,<br>Mumbai, Maharashtra 400072</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Contact Numbers</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">
+                                    <a href="tel:+917045892672" class="hover:text-primary block">+91 7045892672</a>
+                                    <a href="tel:+918928368119" class="hover:text-primary block">+91 8928368119</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                                <i class="fa-solid fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">mantoshcybercenter@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple Map Placeholder (Visually appealing box instead of iframe for faster loading) -->
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl h-80 flex flex-col items-center justify-center text-center p-6 border border-gray-200 dark:border-gray-700 shadow-inner">
+                    <i class="fa-solid fa-map-location-dot text-6xl text-gray-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Locate Us in Chandivali</h3>
+                    <p class="text-gray-500 mb-4">Search 'Dynamic Cyber Point' on Google Maps</p>
+                    <a href="https://maps.google.com/?q=Sangharsh+Nagar,+Chandivali,+Mumbai+400072" target="_blank" class="px-6 py-2 bg-white dark:bg-gray-700 text-primary dark:text-white rounded-full shadow-md font-semibold hover:shadow-lg transition">Open in Maps</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-2">&copy; 2026 Dynamic Cyber Point. All rights reserved.</p>
+            <p class="text-sm">Proprietor: Mantosh | Digital India 🇮🇳</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu & Dynamic Year -->
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/917045892672?text=Hello%20Dynamic%20Cyber%20Point,%20I%20need%20details%20about%20your%20services." 
+       target="_blank" 
+       class="floating-wa bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg transition-transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Interactivity Scripts -->
     <script>
-        // Update copyright year automatically
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Mobile Menu Toggle Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        const icon = btn.querySelector('i');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-            if (menu.classList.contains('hidden')) {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            }
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when a link is clicked
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+        // Dark Mode Toggle Logic
+        const html = document.documentElement;
+        const themeBtnDesktop = document.getElementById('theme-toggle');
+        const themeBtnMobile = document.getElementById('theme-toggle-mobile');
+        const iconDesktop = document.getElementById('theme-icon');
+        const iconMobile = document.getElementById('theme-icon-mobile');
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            updateIcons('dark');
+        }
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+                updateIcons('light');
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+                updateIcons('dark');
+            }
+        }
+
+        function updateIcons(theme) {
+            const isDark = theme === 'dark';
+            iconDesktop.className = isDark ? 'fa-solid fa-sun text-lg text-yellow-400' : 'fa-solid fa-moon text-lg text-gray-600';
+            iconMobile.className = isDark ? 'fa-solid fa-sun text-lg text-yellow-400' : 'fa-solid fa-moon text-lg text-gray-600';
+        }
+
+        themeBtnDesktop.addEventListener('click', toggleTheme);
+        themeBtnMobile.addEventListener('click', toggleTheme);
+
+        // Live Search Filter for Services
+        const searchInput = document.getElementById('searchInput');
+        const serviceItems = document.querySelectorAll('.service-item');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('keyup', function() {
+            let filter = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            serviceItems.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = "";
+                    visibleCount++;
+                } else {
+                    item.style.display = "none";
+                }
             });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
         });
     </script>
 </body>
 </html>
-```
