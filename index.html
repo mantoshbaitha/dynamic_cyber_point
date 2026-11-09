@@ -4,65 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Cyber Point | Digital Services in Mumbai</title>
+    <!-- Tailwind CSS for Advanced Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Poppins', 'sans-serif'] }, colors: { primary: '#2563eb', secondary: '#1e40af' } } } }
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] }, 
+                    colors: { primary: '#2563eb', secondary: '#1e40af' } 
+                } 
+            } 
+        }
     </script>
     <style>
-        .service-card { transition: all 0.3s ease; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
-        .floating-wa { position: fixed; bottom: 20px; right: 20px; z-index: 50; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        /* Advanced Animations & Hover Effects */
+        .service-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); border-color: #2563eb; }
+        
+        /* Floating WhatsApp Button Animation */
+        .floating-wa { position: fixed; bottom: 24px; right: 24px; z-index: 50; animation: bounce-soft 2s infinite; }
+        @keyframes bounce-soft { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+            40% {transform: translateY(-12px);} 
+            60% {transform: translateY(-6px);} 
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-40 w-full backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 transition-colors">
+    <!-- Premium Navigation Bar -->
+    <nav class="sticky top-0 z-40 w-full backdrop-blur-lg bg-white/90 dark:bg-gray-900/90 border-b border-gray-200 dark:border-gray-800 transition-colors shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-2 text-primary dark:text-blue-400 font-bold text-xl md:text-2xl tracking-tight">
-                    <i class="fa-solid fa-laptop-code"></i> Dynamic Cyber Point
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 text-primary dark:text-blue-400 font-extrabold text-2xl md:text-3xl tracking-tight">
+                    <i class="fa-solid fa-laptop-code text-3xl"></i> 
+                    Dynamic Cyber Point
                 </div>
-                <div class="hidden md:flex space-x-8 items-center font-medium">
-                    <a href="#home" class="hover:text-primary transition">Home</a>
-                    <a href="#services" class="hover:text-primary transition">Services</a>
-                    <a href="#contact" class="hover:text-primary transition">Contact</a>
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center font-semibold text-lg">
+                    <a href="#home" class="hover:text-primary transition-colors">Home</a>
+                    <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon text-xl"></i>
                     </button>
                 </div>
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center gap-4">
-                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        <i id="theme-icon-mobile" class="fa-solid fa-moon text-lg"></i>
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon-mobile" class="fa-solid fa-moon text-xl"></i>
                     </button>
-                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-white focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-3xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
-                <a href="#services" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Services</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-lg">
+            <div class="px-4 pt-2 pb-4 space-y-2 text-center font-semibold">
+                <a href="#home" class="block px-3 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 text-primary dark:text-blue-400">Home</a>
+                <a href="#services" class="block px-3 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800">Services</a>
+                <a href="#contact" class="block px-3 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-20 pb-32 flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative pt-24 pb-32 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-950 -z-10"></div>
         <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-primary dark:text-blue-300 font-semibold text-sm mb-6 border border-blue-200 dark:border-blue-800">
+                🚀 Welcome to the Future of Digital Services
+            </div>
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900 dark:text-white leading-tight">
                 Your Trusted <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Digital Partner</span>
             </h1>
-            <p class="text-lg md:text-xl mb-10 text-gray-600 dark:text-gray-300">Fast, reliable, and secure government & digital services in Chandivali.</p>
+            <p class="text-lg md:text-xl mb-10 text-gray-600 dark:text-gray-300 font-medium">Fast, reliable, and secure government & digital services in Chandivali. 100% Expert Support.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#services" class="px-8 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-lg shadow-lg transition-all">Explore Services</a>
+                <a href="#services" class="px-8 py-4 bg-primary hover:bg-secondary text-white font-bold rounded-full shadow-lg shadow-blue-500/30 transition-all transform hover:scale-105">Explore All Services</a>
             </div>
         </div>
     </section>
@@ -70,79 +97,308 @@
     <!-- Services Section -->
     <section id="services" class="py-20">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white">Our Top Services</h2>
+                <p class="text-gray-600 dark:text-gray-400 font-medium text-lg">Search and find exactly what you need.</p>
                 
-                <div class="mt-8 max-w-md mx-auto relative">
-                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400"></i>
-                    <input type="text" id="searchInput" placeholder="Search for a service..." class="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
+                <!-- Advanced Live Search Bar -->
+                <div class="mt-8 max-w-lg mx-auto relative group">
+                    <i class="fa-solid fa-search absolute left-5 top-4 text-gray-400 group-focus-within:text-primary transition-colors text-lg"></i>
+                    <input type="text" id="searchInput" placeholder="Type to search (e.g., Passport, PF, PAN)..." class="w-full pl-14 pr-6 py-4 rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:border-primary dark:focus:border-primary shadow-sm text-lg font-medium transition-all">
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="serviceGrid">
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="serviceGrid">
                 
-                <!-- PAN Card -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
-                    <img src="pan-icon.png.png" alt="PAN Card" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">PAN Card</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">New & Update</p>
-                </div>
+                <!-- ======= USER PREFERENCE ORDER (TOP 11) ======= -->
 
-                <!-- Passport -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                <!-- 1. Passport -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
                     <img src="passport-icon.png.png" alt="Passport Services" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Passport</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Fresh & Renewal</p>
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Passport</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Fresh & Renewal</p>
                 </div>
 
-                <!-- Voter ID -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
-                    <img src="voter-icon.png.png" alt="Voter ID" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Voter ID</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">New / Correction</p>
+                <!-- 2. PF Withdrawal -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="pf-icon.png.png" alt="PF Withdrawal" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">PF Withdrawal</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Claims & Services</p>
                 </div>
 
-                <!-- Aadhaar Card -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
-                    <img src="21_aadhaar-icon.png.png" alt="Aadhaar" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Aadhaar Card</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Print & Update</p>
+                <!-- 3. Udyam Aadhaar -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="udyam-icon.png.png" alt="Udyam Aadhaar" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Udyam Aadhaar</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Business Reg.</p>
                 </div>
 
-                <!-- Gumasta -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                <!-- 4. Police Verification / Gate Pass / NOC -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="pcc-icon.png.png" alt="Police Verification" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">Police Verification</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Gate Pass / NOC</p>
+                </div>
+
+                <!-- 5. Gumasta Licence -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
                     <img src="gumasta-icon.png.png" alt="Gumasta License" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Gumasta License</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Shop Act</p>
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">Gumasta License</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Shop Act</p>
+                </div>
+
+                <!-- 6. Gazzat -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="gazette-icon.png.png" alt="Gazette Name Change" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Gazzat</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Name Change</p>
+                </div>
+
+                <!-- 7. Voter Id -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="voter-icon.png.png" alt="Voter ID" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Voter ID</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">New / Correction</p>
+                </div>
+
+                <!-- 8. Aadhaar Address Change -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="21_aadhaar-icon.png.png" alt="Aadhaar Address Change" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-md font-bold mb-1 text-gray-900 dark:text-white leading-tight mt-1">Aadhaar Address Change</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Update & Print</p>
+                </div>
+
+                <!-- 9. Ayushman Card -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="ayushman-icon.png.png" alt="Ayushman Card" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">Ayushman Card</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">PMJAY</p>
+                </div>
+
+                <!-- 10. E Shram Card -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="e_shram-icon.png.png" alt="E-Shram Card" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">E-Shram Card</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Labour Card</p>
+                </div>
+
+                <!-- 11. Adani Electricity Name Change -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="online-icon.png.png" alt="Adani Electricity" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-md font-bold mb-1 text-gray-900 dark:text-white leading-tight mt-1">Adani Electricity</h3>
+                    <p class="text-xs font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">Name Change</p>
+                </div>
+
+                <!-- ======= OTHER SERVICES ======= -->
+
+                <!-- PAN Card -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="pan-icon.png.png" alt="PAN Card" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">PAN Card</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">New & Update</p>
                 </div>
 
                 <!-- Income Certificate -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
                     <img src="income-icon.png.png" alt="Income Certificate" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Income Cert.</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">State Service</p>
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Income Cert.</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">State Service</p>
                 </div>
 
                 <!-- Domicile Certificate -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
                     <img src="domicile-icon.png.png" alt="Domicile Certificate" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Domicile Cert.</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">State Service</p>
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Domicile Cert.</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">State Service</p>
                 </div>
 
-                <!-- Gazette -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
-                    <img src="gazette-icon.png.png" alt="Gazette Name Change" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Gazzat Cert.</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Name Change</p>
+                <!-- Resume & CV -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="resume-icon.png.png" alt="Resume CV" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Resume & CV</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Creation</p>
                 </div>
 
-                <!-- PCC -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 service-card text-center">
-                    <img src="pcc-icon.png.png" alt="Police Clearance" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
-                    <h3 class="text-lg font-bold mb-1">Police Clearance</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">PCC Application</p>
+                <!-- Money Transfer -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="money-icon.png.png" alt="Money Transfer" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Money Transfer</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Domestic</p>
                 </div>
 
-                <!-- Udyam -->
-                <div class="service-item bg-white dark:bg-gray-800 p-4 rounded-xl
+                <!-- Lamination -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="16_lamination-icon.png.png" alt="Lamination" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Lamination</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">All Types</p>
+                </div>
+
+                <!-- FSSAI Food License -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="17_fssai_license-icon.png.png" alt="Food License" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Food License</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">FSSAI Reg.</p>
+                </div>
+
+                <!-- Urgent Passport Photo -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="18_passport_size_photo-icon.png.png" alt="Passport Photo" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white leading-tight">Passport Photo</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Urgent Service</p>
+                </div>
+
+                <!-- MAHA ID -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="19_maha_id-icon.png.png" alt="MAHA ID" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">MAHA ID</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Govt Services</p>
+                </div>
+
+                <!-- PVC Cards -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="20_pvc_cards-icon.png.png" alt="PVC Cards" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">PVC Cards</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Smart Card Print</p>
+                </div>
+
+                <!-- Train Tickets -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="22_railway_train-icon.png.png" alt="Train Tickets" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Train Tickets</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">IRCTC Booking</p>
+                </div>
+
+                <!-- Flight Tickets -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="23_flight-icon.png.png" alt="Flight Tickets" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Flight Tickets</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Booking</p>
+                </div>
+
+                <!-- Bus Tickets -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="24_bus-icon.png.png" alt="Bus Tickets" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Bus Tickets</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">All India</p>
+                </div>
+
+                <!-- Print & Scan -->
+                <div class="service-item bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 service-card text-center">
+                    <img src="25_printer-icon.png.png" alt="Print" class="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-md">
+                    <h3 class="text-lg font-bold mb-1 text-gray-900 dark:text-white">Print & Scan</h3>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Xerox & Scan</p>
+                </div>
+
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-16">
+                <i class="fa-solid fa-folder-open text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">Service Not Found</h3>
+                <p class="text-gray-500 dark:text-gray-400">Please contact us, we probably do that too!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-extrabold mb-8 text-gray-900 dark:text-white">Visit Our Center</h2>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 bg-blue-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0 shadow-sm"><i class="fa-solid fa-location-dot text-2xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-gray-900 dark:text-white">Shop Address</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-2 font-medium text-lg leading-relaxed">Sangharsh Nagar, Nearby Zudio,<br>Chandivali, Andheri East,<br>Mumbai, Maharashtra 400072</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 bg-green-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-colors shrink-0 shadow-sm"><i class="fa-solid fa-phone text-2xl"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-gray-900 dark:text-white">Call or WhatsApp</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-2 font-semibold text-lg">
+                                    <a href="tel:+917045892672" class="hover:text-primary block transition-colors">+91 7045892672</a>
+                                    <a href="tel:+918928368119" class="hover:text-primary block transition-colors mt-1">+91 8928368119</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Banner Graphic Replacement (Placeholder for professional look) -->
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-10 text-white shadow-2xl text-center transform transition hover:scale-[1.02] duration-300">
+                    <i class="fa-solid fa-headset text-6xl mb-6 text-blue-200"></i>
+                    <h3 class="text-3xl font-bold mb-4">Need Urgent Help?</h3>
+                    <p class="text-blue-100 text-lg mb-8">Message us directly on WhatsApp for instant replies regarding any government form or ticket booking.</p>
+                    <a href="https://wa.me/917045892672?text=Hello%20Dynamic%20Cyber%20Point!" target="_blank" class="inline-block px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:bg-gray-50 transition-colors text-lg">Chat Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-gray-400 py-10 border-t border-gray-900 text-center">
+        <p class="font-medium">&copy; 2026 Dynamic Cyber Point. All rights reserved.</p>
+        <p class="text-sm mt-2">Digital India 🇮🇳 | Expert Support</p>
+    </footer>
+
+    <!-- ADVANCED FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/917045892672?text=Hello%20Dynamic%20Cyber%20Point,%20I%20need%20help%20with%20a%20service." 
+       target="_blank" 
+       class="floating-wa flex items-center justify-center w-16 h-16 bg-[#25D366] hover:bg-[#1EBE53] text-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all hover:scale-110 group">
+        <i class="fa-brands fa-whatsapp text-4xl group-hover:rotate-12 transition-transform duration-300"></i>
+    </a>
+
+    <!-- Scripts for Interactivity -->
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dark Mode Logic (Saves preference in LocalStorage)
+        const html = document.documentElement;
+        const themeBtnDesktop = document.getElementById('theme-toggle');
+        const themeBtnMobile = document.getElementById('theme-toggle-mobile');
+        
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        }
+        themeBtnDesktop.addEventListener('click', toggleTheme);
+        themeBtnMobile.addEventListener('click', toggleTheme);
+
+        // Advanced Live Search
+        const searchInput = document.getElementById('searchInput');
+        const serviceItems = document.querySelectorAll('.service-item');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('keyup', function() {
+            let filter = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+            
+            serviceItems.forEach(item => {
+                if(item.innerText.toLowerCase().includes(filter)) {
+                    item.style.display = "";
+                    visibleCount++;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
